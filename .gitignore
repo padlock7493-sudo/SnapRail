@@ -1,0 +1,10 @@
+**/bin/
+**/obj/
+.vs/
+artifacts/
+release/
+**/__pycache__/
+*.zip
+*.log
+*.user
+scripts/dotnet-install.ps1

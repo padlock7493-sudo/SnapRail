@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyName>SnapRail</AssemblyName>
+    <Version>1.0.0</Version>
+    <Product>SnapRail · 随手挂</Product>
+    <Description>Windows screenshot and desktop pinboard utility</Description>
+    <ApplicationIcon>Assets\SnapRail-mist-blue-v1.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup><Resource Include="Assets\SnapRail-mist-blue-v1.ico" /></ItemGroup>
+  <ItemGroup><EmbeddedResource Include="OcrWorker.ps1" LogicalName="SnapRail.OcrWorker.ps1" /></ItemGroup>
+</Project>
