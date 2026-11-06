@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>SnapRail 本地实机测试</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#eaf3ef;color:#253a40;font-family:-apple-system,BlinkMacSystemFont,sans-serif}header{padding:24px 6%;background:#fff;border-bottom:2px solid #a9d8c6}h1{margin:0 0 10px;font-size:28px}p{margin:6px 0}button{padding:9px 14px;border:1px solid #7cb4a1;background:#cde8de;border-radius:8px;margin-right:8px;color:#253a40}main{max-width:1100px;margin:24px auto}article{background:white;margin:0 0 19px;padding:24px;border-top:6px solid var(--tone);box-shadow:0 0 0 1px #d0deda;border-radius:8px;position:relative;overflow:hidden}h2{margin:0 0 12px;font-size:26px}.bars{display:flex;gap:13px;height:78px;margin:18px 0}.bars i{flex:1;background:var(--tone);align-self:flex-end;opacity:.75}.stamp{position:absolute;right:20px;top:20px;color:#53686b;font-size:14px}.pattern{height:70px;background-image:var(--pattern);background-size:100% 100%;border:1px solid #d0deda}.foot{font-size:12px;color:#53686b;margin-top:12px}
+</style></head><body><header><h1>SnapRail macOS 完整测试 · 本地演示页面</h1><p>用于截图、标注、中文 OCR、自动滚动和长图拼接。所有文字和图形均为专门生成的测试内容，无个人资料。</p><p>English OCR target: SnapRail screenshot verification 2026.</p><button id="top" onclick="window.scrollTo(0,0)">回到顶部</button><button id="middle" onclick="window.scrollTo(0,480)">定位滚动测试区</button></header><main id="content"></main>
+<script>
+const colors=['#83bad3','#8bc6ad','#f1ba89','#c0acd2','#e9c872','#7fb7ac'];
+for(let n=1;n<=32;n++){
+const article=document.createElement('article');article.style.setProperty('--tone',colors[(n-1)%colors.length]);
+let seed=n*173+13;let stops=[];for(let y=0;y<70;y++){seed=(seed*1664525+1013904223)>>>0;let h=seed%360;stops.push(`hsl(${h} 34% 84%) ${y/70*100}% ${((y+1)/70)*100}%`)}
+article.style.setProperty('--pattern',`linear-gradient(180deg,${stops.join(',')})`);
+article.innerHTML=`<span class="stamp">Section ${String(n).padStart(2,'0')} · ${(n*7919).toString(16).toUpperCase()}</span><h2>${String(n).padStart(2,'0')} · 截一张，随手挂一下！</h2><p>记录第 ${n} 个好点子：截图标注重点，随时找回灵感。</p><p>SnapRail local test section ${n}. Distinct overlap markers keep every row in order.</p><div class="bars">${[0,1,2,3,4,5,6,7].map(i=>`<i style="height:${28+(n*19+i*13)%50}px"></i>`).join('')}</div><div class="pattern"></div><div class="foot">本地生成 / 无个人资料 / OCR 识别目标 ${n*137+2026} / 长图重叠校验</div>`;
+document.querySelector('#content').append(article);
+}
+</script></body></html>

@@ -23,20 +23,20 @@ try {
     $guide = Join-Path $work ('SnapRail-v' + $version + '-Guide')
     $guideIcon = Join-Path $guide 'src\SnapRail.App\Assets'
     New-Item -ItemType Directory -Path $guideIcon -Force | Out-Null
-    Copy-Item -LiteralPath 'README.md','LICENSE','CHANGELOG.md' -Destination $guide
+    Copy-Item -LiteralPath 'README.md','README.en.md','README_WINDOWS.md','README_WINDOWS.en.md','README_MACOS.md','README_MACOS.en.md','LICENSE','CHANGELOG.md' -Destination $guide
     Copy-Item -LiteralPath 'docs' -Destination $guide -Recurse
     Copy-Item -LiteralPath 'src\SnapRail.App\Assets\SnapRail-mist-blue-v1.png' -Destination $guideIcon
     Compress-Archive -LiteralPath $guide -DestinationPath (Join-Path $destination ('SnapRail-v' + $version + '-Guide.zip')) -Force
     if ($IncludeSource) {
         $source = Join-Path $work ('SnapRail-v' + $version + '-source')
         New-Item -ItemType Directory -Path $source | Out-Null
-        $roots = @('README.md','CHANGELOG.md','.gitignore','global.json','SnapRail.sln','src','scripts','tests','docs')
+        $roots = @('README.md','README.en.md','README_WINDOWS.md','README_WINDOWS.en.md','README_MACOS.md','README_MACOS.en.md','CHANGELOG.md','.gitignore','global.json','SnapRail.sln','src','macos','scripts','tests','docs')
         if (Test-Path -LiteralPath 'LICENSE') { $roots += 'LICENSE' }
         foreach ($entry in $roots) {
             $files = if ((Get-Item -LiteralPath $entry).PSIsContainer) { Get-ChildItem -LiteralPath $entry -Recurse -File } else { Get-Item -LiteralPath $entry }
             foreach ($file in $files) {
                 $relative = $file.FullName.Substring($projectRoot.TrimEnd('\').Length + 1)
-                if ($relative -match '(^|[\\/])(bin|obj|__pycache__)([\\/]|$)' -or $file.Name -eq 'dotnet-install.ps1') { continue }
+                if ($relative -match '(^|[\\/])(bin|obj|__pycache__|\.build|\.swiftpm)([\\/]|$)' -or $file.Name -eq 'dotnet-install.ps1') { continue }
                 $target = Join-Path $source $relative
                 New-Item -ItemType Directory -Path (Split-Path -Parent $target) -Force | Out-Null
                 Copy-Item -LiteralPath $file.FullName -Destination $target
